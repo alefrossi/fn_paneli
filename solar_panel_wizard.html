@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FN paneli Kalkulator – FN Panel Preporuka</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#0B3D5C;--primary-light:#1a5276;--secondary:#4A9ECF;
+  --accent:#2ECC71;--accent-hover:#27AE60;
+  --bg:#f8fafc;--card:#fff;--text:#1a2332;--muted:#5a6a7a;--faint:#8a9ab0;
+  --border:#e2e8f0;--sh-sm:0 2px 8px rgba(0,0,0,.06);
+  --sh-md:0 4px 16px rgba(0,0,0,.10);--sh-lg:0 8px 32px rgba(0,0,0,.12);
+  --r:12px;--r-lg:20px;--t:300ms ease
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+
+/* HEADER */
+header{background:linear-gradient(135deg,var(--primary),var(--primary-light));padding:0 24px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.15)}
+.hdr{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;cursor:pointer}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#f39c12,#f1c40f);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.logo-text{font-size:1.05rem;font-weight:700}
+.logo-sub{font-size:.68rem;opacity:.75;display:block;font-weight:400;letter-spacing:.5px;text-transform:uppercase}
+nav a{color:rgba(255,255,255,.85);text-decoration:none;font-size:.87rem;font-weight:500;margin-left:22px;transition:color var(--t)}
+nav a:hover{color:#fff}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--primary) 0%,#1a6b8a 55%,var(--secondary) 100%);color:#fff;padding:76px 24px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;left:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(255,255,255,.05),transparent 70%);pointer-events:none}
+.hero-inner{max-width:680px;margin:0 auto;position:relative;z-index:1}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.9);padding:6px 16px;border-radius:50px;font-size:.76rem;font-weight:500;letter-spacing:.5px;margin-bottom:22px}
+.hero h1{font-size:clamp(1.9rem,5vw,2.9rem);font-weight:800;line-height:1.15;margin-bottom:18px;letter-spacing:-.5px}
+.hero h1 em{font-style:normal;color:#f1c40f}
+.hero p{font-size:1.05rem;opacity:.85;max-width:500px;margin:0 auto 34px}
+.btn-primary{background:var(--accent);color:#fff;border:none;padding:14px 36px;border-radius:50px;font-size:.98rem;font-weight:600;cursor:pointer;transition:all var(--t);display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(46,204,113,.4);font-family:inherit}
+.btn-primary:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 6px 28px rgba(46,204,113,.5)}
+.hero-stats{display:flex;gap:32px;justify-content:center;margin-top:44px;flex-wrap:wrap}
+.stat-v{font-size:1.8rem;font-weight:800;color:#f1c40f}
+.stat-l{font-size:.76rem;opacity:.7;text-transform:uppercase;letter-spacing:.5px}
+
+/* SECTION */
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+section{padding:60px 0}
+.sh{text-align:center;margin-bottom:44px}
+.sl{font-size:.76rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--secondary);margin-bottom:10px}
+.st{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;color:var(--primary);letter-spacing:-.3px}
+.ss{color:var(--muted);margin-top:10px;font-size:.97rem}
+
+/* PANEL CARDS */
+.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:18px}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:26px 18px;text-align:center;transition:all var(--t);position:relative;overflow:hidden}
+.pc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--secondary));transform:scaleX(0);transition:transform var(--t)}
+.pc:hover{transform:translateY(-4px);box-shadow:var(--sh-lg);border-color:var(--secondary)}
+.pc:hover::before{transform:scaleX(1)}
+.pi{font-size:2.3rem;margin-bottom:12px;display:block}
+.pn{font-size:.93rem;font-weight:700;color:var(--primary);margin-bottom:7px}
+.pe{display:inline-block;background:rgba(74,158,207,.1);color:var(--secondary);font-size:.75rem;font-weight:600;padding:3px 10px;border-radius:50px;margin-bottom:10px}
+.pd{font-size:.78rem;color:var(--muted);line-height:1.5}
+.ppc{margin-top:10px;font-size:.74rem;text-align:left}
+.pro{color:var(--accent);margin-bottom:2px}
+.con{color:#e74c3c;margin-bottom:2px}
+
+/* COMPARISON TABLE */
+.ctbl{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh-sm)}
+.ctbl th{background:var(--primary);color:#fff;padding:13px 15px;font-size:.8rem;font-weight:600;text-align:left}
+.ctbl td{padding:11px 15px;font-size:.83rem;border-bottom:1px solid var(--border);color:var(--text)}
+.ctbl tr:last-child td{border-bottom:none}
+.ctbl tr:hover td{background:var(--bg)}
+.eb{display:flex;align-items:center;gap:8px}
+.et{flex:1;height:6px;background:var(--border);border-radius:50px;overflow:hidden}
+.ef{height:100%;background:linear-gradient(90deg,var(--secondary),var(--accent));border-radius:50px}
+
+/* HOW IT WORKS */
+.how-bg{background:linear-gradient(135deg,#f0f7ff,#e8f5e9)}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.step{text-align:center}
+.sn{width:54px;height:54px;background:linear-gradient(135deg,var(--primary),var(--secondary));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.15rem;font-weight:800;margin:0 auto 14px}
+.step h3{font-size:.98rem;font-weight:700;color:var(--primary);margin-bottom:7px}
+.step p{font-size:.83rem;color:var(--muted)}
+
+/* QUIZ */
+#quiz-section{background:#fff}
+.qw{max-width:680px;margin:0 auto}
+.pb-wrap{margin-bottom:36px}
+.pb-info{display:flex;justify-content:space-between;margin-bottom:7px}
+.pb-lbl{font-size:.8rem;font-weight:600;color:var(--muted)}
+.pb-pct{font-size:.8rem;font-weight:700;color:var(--secondary)}
+.pb-track{height:6px;background:var(--border);border-radius:50px;overflow:hidden}
+.pb-fill{height:100%;background:linear-gradient(90deg,var(--secondary),var(--accent));border-radius:50px;transition:width 500ms cubic-bezier(.4,0,.2,1)}
+.dots{display:flex;gap:8px;justify-content:center;margin-bottom:36px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:all var(--t)}
+.dot.active{background:var(--secondary);transform:scale(1.3)}
+.dot.done{background:var(--accent)}
+.qcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:38px;box-shadow:var(--sh-md);animation:si 400ms ease}
+@keyframes si{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.qnum{font-size:.76rem;font-weight:600;color:var(--secondary);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.qtxt{font-size:1.25rem;font-weight:700;color:var(--primary);margin-bottom:7px;line-height:1.3}
+.qhint{font-size:.83rem;color:var(--faint);margin-bottom:26px}
+.og{display:grid;gap:11px}
+.ob{display:flex;align-items:center;gap:13px;padding:15px 18px;border:2px solid var(--border);border-radius:var(--r);cursor:pointer;transition:all var(--t);background:#fff;text-align:left;font-family:inherit}
+.ob:hover{border-color:var(--secondary);background:rgba(74,158,207,.05);transform:translateX(4px)}
+.ob.sel{border-color:var(--secondary);background:rgba(74,158,207,.08)}
+.oi{font-size:1.45rem;width:38px;text-align:center;flex-shrink:0}
+.ot{flex:1}
+.ott{font-size:.93rem;font-weight:600;color:var(--text)}
+.ots{font-size:.76rem;color:var(--faint);margin-top:2px}
+.ora{width:20px;height:20px;border:2px solid var(--border);border-radius:50%;flex-shrink:0;transition:all var(--t);position:relative}
+.ob.sel .ora{border-color:var(--secondary);background:var(--secondary)}
+.ob.sel .ora::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:6px;height:6px;border-radius:50%;background:#fff}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:30px}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);padding:10px 22px;border-radius:50px;font-size:.88rem;font-weight:500;cursor:pointer;transition:all var(--t);font-family:inherit}
+.btn-ghost:hover{border-color:var(--secondary);color:var(--secondary)}
+.btn-next{background:var(--primary);color:#fff;border:none;padding:12px 30px;border-radius:50px;font-size:.93rem;font-weight:600;cursor:pointer;transition:all var(--t);display:flex;align-items:center;gap:8px;font-family:inherit}
+.btn-next:hover:not(:disabled){background:var(--secondary);transform:translateX(2px)}
+.btn-next:disabled{opacity:.35;cursor:not-allowed}
+
+/* RESULT */
+.rcard{background:var(--card);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg);animation:ri 600ms ease}
+@keyframes ri{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+.rhdr{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;padding:38px;position:relative;overflow:hidden}
+.rhdr::after{content:'';position:absolute;bottom:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.07),transparent 70%)}
+.rbadge{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:#fff;padding:5px 14px;border-radius:50px;font-size:.75rem;font-weight:600;letter-spacing:.5px;margin-bottom:18px}
+.rpname{font-size:1.85rem;font-weight:800;margin-bottom:6px}
+.rpsub{opacity:.75;font-size:.93rem}
+.reff{display:inline-block;background:rgba(255,255,255,.2);padding:7px 18px;border-radius:8px;font-size:1.4rem;font-weight:800;margin-top:18px}
+.rbody{padding:38px}
+.rtitle{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--faint);margin-bottom:14px}
+.reason{background:rgba(46,204,113,.07);border-left:3px solid var(--accent);padding:18px;border-radius:0 var(--r) var(--r) 0;margin-bottom:28px}
+.reason p{color:var(--text);font-size:.92rem;line-height:1.75}
+.sg2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:22px}
+.si{background:var(--bg);border-radius:var(--r);padding:14px}
+.si-l{font-size:.69rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--faint);margin-bottom:3px}
+.si-v{font-size:.97rem;font-weight:700;color:var(--primary)}
+.pcg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:28px}
+.pl,.cl{background:var(--bg);border-radius:var(--r);padding:18px}
+.pl h4{color:var(--accent);font-size:.82rem;font-weight:700;margin-bottom:10px}
+.cl h4{color:#e74c3c;font-size:.82rem;font-weight:700;margin-bottom:10px}
+.pl li,.cl li{font-size:.8rem;color:var(--muted);margin-bottom:5px;padding-left:14px;position:relative;list-style:none}
+.pl li::before{content:'✓';position:absolute;left:0;color:var(--accent);font-weight:700}
+.cl li::before{content:'✗';position:absolute;left:0;color:#e74c3c;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.chip{background:rgba(11,61,92,.07);color:var(--primary);padding:6px 14px;border-radius:50px;font-size:.78rem;font-weight:500}
+.ract{display:flex;gap:12px;flex-wrap:wrap}
+.btn-restart{background:transparent;color:var(--primary);border:2px solid var(--primary);padding:12px 26px;border-radius:50px;font-size:.88rem;font-weight:600;cursor:pointer;transition:all var(--t);font-family:inherit}
+.btn-restart:hover{background:var(--primary);color:#fff}
+footer{background:var(--primary);color:rgba(255,255,255,.7);text-align:center;padding:30px 24px;font-size:.83rem}
+footer span{color:#fff;font-weight:600}
+.hidden{display:none!important}
+@media(max-width:768px){.sg{grid-template-columns:1fr}.sg2,.pcg{grid-template-columns:1fr}.qcard{padding:22px}.rhdr,.rbody{padding:24px}.pg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.pg{grid-template-columns:1fr}nav{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <div class="logo" onclick="scrollToTop()">
+      <div class="logo-icon">☀️</div>
+      <div>
+        <span class="logo-text">Solar Wizard</span>
+        <span class="logo-sub">FN Panel Preporuka</span>
+      </div>
+    </div>
+    <nav>
+      <a href="#panels-sec">Tipovi Panela</a>
+      <a href="#how-sec">Kako radi</a>
+      <a href="#quiz-section">Pokrenite Kviz</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+   
+    <h1>Pronađi <em>FN</em><br>panel za tebe</h1>
+   
+    <button class="btn-primary" onclick="startQuiz()">⚡ Pokreni Analizu →</button>
+   
+  </div>
+</section>
+
+<!-- PANEL TYPES -->
+<section id="panels-sec">
+  <div class="wrap">
+    <div class="sh">
+      <div class="sl">Tipovi FN Panela</div>
+      <h2 class="st">Upoznajte fotonaponske tehnologije</h2>
+      <p class="ss">Svaki tip panela nudi jedinstvene prednosti za različite primjene i uvjete.</p>
+    </div>
+    <div class="pg">
+      <div class="pc">
+        <span class="pi">⬛</span>
+        <div class="pn">Monokristalni</div>
+        <span class="pe">18 – 24%</span>
+        <p class="pd">Jednokristalinični silicij visoke čistoće. Tamne, zaobljene ćelije. Industrijski standard za visoke performanse.</p>
+        <div class="ppc">
+          <div class="pro">✓ Najveća efikasnost</div>
+          <div class="pro">✓ Mala površina</div>
+          <div class="con">✗ Veća cijena</div>
+        </div>
+      </div>
+      <div class="pc">
+        <span class="pi">🔷</span>
+        <div class="pn">Polikristalni</div>
+        <span class="pe">15 – 18%</span>
+        <p class="pd">Više kristala silicija. Plavičasta boja. Ekonomičan izbor za veće instalacije i projekte s budžetom.</p>
+        <div class="ppc">
+          <div class="pro">✓ Niža cijena</div>
+          <div class="pro">✓ Pouzdanost</div>
+          <div class="con">✗ Niža efikasnost</div>
+        </div>
+      </div>
+      <div class="pc">
+        <span class="pi">🌫️</span>
+        <div class="pn">Tanki Film</div>
+        <span class="pe">8 – 19%</span>
+        <p class="pd">CdTe, CIGS ili a-Si nanesen na podlogu. Fleksibilan, lagan, superior u hladnoj/oblačnoj klimi.</p>
+        <div class="ppc">
+          <div class="pro">✓ Hladna klima</div>
+          <div class="pro">✓ Difuzno svjetlo</div>
+          <div class="con">✗ Veća površina</div>
+        </div>
+      </div>
+      <div class="pc">
+        <span class="pi">🪟</span>
+        <div class="pn">Bifacijalni</div>
+        <span class="pe">20 – 21% (+)</span>
+        <p class="pd">Energija sa obje strane panela. Staklo-staklo konstrukcija. Idealan za otvorene solarne farme.</p>
+        <div class="ppc">
+          <div class="pro">✓ Energija s 2 strane</div>
+          <div class="pro">✓ Dug vijek</div>
+          <div class="con">✗ Zahtijeva refleksiju</div>
+        </div>
+      </div>
+      <div class="pc">
+        <span class="pi">🔋</span>
+        <div class="pn">PERC</div>
+        <span class="pe">20 – 22%</span>
+        <p class="pd">Pasivizirana emiterska i zadnja ćelija. Napredna refleksija, poboljšana efikasnost i prinos.</p>
+        <div class="ppc">
+          <div class="pro">✓ Viši prinos</div>
+          <div class="pro">✓ Rad u sjeni</div>
+          <div class="con">✗ Skuplja izrada</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;overflow-x:auto">
+      <table class="ctbl">
+        <thead>
+          <tr>
+            <th>Tip panela</th><th>Efikasnost</th><th>Relativno</th>
+            <th>Cijena</th><th>Idealna primjena</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Monokristalni</strong></td><td>18–24%</td><td><div class="eb"><div class="et"><div class="ef" style="width:85%"></div></div><span style="font-size:.73rem;color:var(--faint)">85%</span></div></td><td>Visoka</td><td>Krovovi, ograničen prostor</td></tr>
+          <tr><td><strong>Polikristalni</strong></td><td>15–18%</td><td><div class="eb"><div class="et"><div class="ef" style="width:62%"></div></div><span style="font-size:.73rem;color:var(--faint)">62%</span></div></td><td>Niska</td><td>Farme, ograničen budžet</td></tr>
+          <tr><td><strong>Tanki film (CdTe)</strong></td><td>19–19.3%</td><td><div class="eb"><div class="et"><div class="ef" style="width:72%"></div></div><span style="font-size:.73rem;color:var(--faint)">72%</span></div></td><td>Srednja</td><td>Hladna klima, utility-scale</td></tr>
+          <tr><td><strong>Bifacijalni</strong></td><td>20–21%+</td><td><div class="eb"><div class="et"><div class="ef" style="width:80%"></div></div><span style="font-size:.73rem;color:var(--faint)">80%</span></div></td><td>Visoka</td><td>Otvorene solarne farme</td></tr>
+          <tr><td><strong>PERC</strong></td><td>20–22%</td><td><div class="eb"><div class="et"><div class="ef" style="width:88%"></div></div><span style="font-size:.73rem;color:var(--faint)">88%</span></div></td><td>Visoka+</td><td>Moderni domovi, komercijala</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-sec" class="how-bg">
+  <div class="wrap">
+    <div class="sh">
+      <div class="sl">Proces</div>
+      <h2 class="st">Kako funkcionira preporuka?</h2>
+    </div>
+    <div class="sg">
+      <div class="step">
+        <div class="sn">01</div>
+        <h3>Odgovori na pitanja</h3>
+        <p>5 kratkih pitanja o lokaciji, sistemu, prostoru, klimi i prioritetima. Traje manje od 2 minute.</p>
+      </div>
+      <div class="step">
+        <div class="sn">02</div>
+        <h3>Analiza parametara</h3>
+        <p>Algoritam boduje svaki tip panela na osnovu tehničkih karakteristika i tvojih odgovora.</p>
+      </div>
+      <div class="step">
+        <div class="sn">03</div>
+        <h3>Personalizovana preporuka</h3>
+        <p>Dobiješ detaljan prikaz preporučenog panela sa specifikacijama, prednostima i primjerima.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz-section">
+  <div class="wrap">
+    <div class="sh">
+      <div class="sl">Interaktivna Analiza</div>
+      <h2 class="st">Pronađi svoj idealni panel</h2>
+    </div>
+    <div class="qw">
+      <!-- START -->
+      <div id="start-screen">
+        <div class="qcard" style="text-align:center">
+          <div style="font-size:3.2rem;margin-bottom:18px">☀️</div>
+          <h2 style="font-size:1.5rem;font-weight:800;color:var(--primary);margin-bottom:10px">Spreman za analizu?</h2>
+          <p style="color:var(--muted);margin-bottom:28px;max-width:380px;margin-left:auto;margin-right:auto">
+            Odgovori na 5 pitanja i saznat ćeš koji FN panel je idealan za tvoje potrebe i uvjete.
+          </p>
+          <button class="btn-primary" onclick="startQuiz()">🚀 Pokreni Analizu</button>
+        </div>
+      </div>
+
+      <!-- QUIZ CONTAINER -->
+      <div id="quiz-container" class="hidden">
+        <div class="pb-wrap">
+          <div class="pb-info">
+            <span class="pb-lbl" id="pb-lbl">Pitanje 1 od 5</span>
+            <span class="pb-pct" id="pb-pct">20%</span>
+          </div>
+          <div class="pb-track"><div class="pb-fill" id="pb-fill" style="width:20%"></div></div>
+        </div>
+        <div class="dots" id="dots">
+          <div class="dot active"></div><div class="dot"></div>
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+        <div id="q-container"></div>
+      </div>
+
+      <!-- RESULT -->
+      <div id="result-container" class="hidden"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <span>FN paneli kalkulator</span> · Projektovanje sistema za konverziju energije</p>
+ 
+</footer>
+
+<script>
+const questions = [
+  {
+    id:1,text:"Gdje planiraš instalirati FN panel?",
+    hint:"Lokacija ugradnje značajno utiče na izbor tipa panela",
+    opts:[
+      {id:"krov",icon:"🏠",t:"Krov kuće / stambeni objekat",s:"Privatna ili manja poslovna zgrada"},
+      {id:"fasada",icon:"🏢",t:"Fasada ili poslovni objekat",s:"Integracija u arhitektonski dizajn zgrade"},
+      {id:"farma",icon:"🌱",t:"Solarna farma / veće postrojenje",s:"Otvoreni teren, industrijska instalacija"}
+    ]
+  },
+  {
+    id:2,text:"Koji tip sistema planiraš?",
+    hint:"Tip sistema određuje zahtjeve za napon, snagu i pouzdanost",
+    opts:[
+      {id:"offgrid",icon:"🔋",t:"Off-grid sistem",s:"Nezavisan od mreže, baterijska pohrana"},
+      {id:"ongrid",icon:"🔌",t:"On-grid sistem",s:"Direktno spojen na elektrodistributivnu mrežu"},
+      {id:"hibrid",icon:"⚡",t:"Hibridni sistem",s:"Kombinacija mreže i rezervne baterije"}
+    ]
+  },
+  {
+    id:3,text:"Kolika je raspoloživa površina za montažu?",
+    hint:"Veća efikasnost panela znači manje potrebne površine za istu snagu",
+    opts:[
+      {id:"mala",icon:"📐",t:"Ograničena (ispod 20 m²)",s:"Mala krovna površina ili balkon"},
+      {id:"srednja",icon:"📏",t:"Umjerena (20 – 50 m²)",s:"Prosječan krov porodične kuće"},
+      {id:"velika",icon:"🗺️",t:"Velika (više od 50 m²)",s:"Industrijski krov ili otvoreni teren"}
+    ]
+  },
+  {
+    id:4,text:"Kakvi su klimatski uslovi na tvojoj lokaciji?",
+    hint:"Različiti paneli reaguju drugačije na temperaturu i difuzno osvjetljenje",
+    opts:[
+      {id:"suncana",icon:"☀️",t:"Sunčana regija",s:"Više od 5.5 kWh/m²/dan, topla klima"},
+      {id:"umjerena",icon:"⛅",t:"Umjerena klima",s:"4 – 5.5 kWh/m²/dan, sezonske promjene"},
+      {id:"hladna",icon:"❄️",t:"Hladna / oblačna klima",s:"Manje od 4 kWh/m²/dan, česti oblaci"}
+    ]
+  },
+  {
+    id:5,text:"Koji je tvoj primarni prioritet?",
+    hint:"Pomozi nam uravnotežiti između efikasnosti, cijene i pouzdanosti",
+    opts:[
+      {id:"efikasnost",icon:"🏆",t:"Maksimalna efikasnost",s:"Hoću najvišu snagu na raspoloživoj površini"},
+      {id:"cijena",icon:"💰",t:"Najbolji omjer cijene i performansi",s:"Razuman kompromis između troška i prinosa"},
+      {id:"pouzdanost",icon:"🛡️",t:"Pouzdanost i dugotrajnost",s:"Dugi vijek, minimalno održavanje"}
+    ]
+  }
+];
+
+const panels = {
+  mono:{
+    name:"Monokristalni panel",sub:"Mono Half-Cell – Visoka efikasnost",icon:"⬛",
+    eff:"20.5 – 21.5%",ex:"Sankopower 450W Mono PERC, 120 ćelija 182×182 mm",
+    warranty:"25 godina linearno",weight:"24 kg",dims:"1909×1134×35 mm",
+    voc:"41.25 V",isc:"13.89 A",pmax:"450 W",tc:"-0.43 %/°C",
+    pros:["Najveća efikasnost na tržištu","Minimalna potrebna površina","Vijek 25+ godina","Estetski tamni izgled"],
+    cons:["Veća početna investicija","Složenija reciklaža"],
+    apps:["Krovni sistemi kuća","Urbane instalacije","Ograničena površina"]
+  },
+  poly:{
+    name:"Polikristalni panel",sub:"Poly PERC – Ekonomičan izbor",icon:"🔷",
+    eff:"18.9 – 19.1%",ex:"SolarSpace P1575BB104M8 – 157×157 mm, 5 busbar",
+    warranty:"25 godina linearno",weight:"2.5 kg (30W modul)",dims:"340×620×20 mm",
+    voc:"22.5 V",isc:"1.80 A",pmax:"30 W",tc:"-0.40 %/°C",
+    pros:["Niža cijena po Wattu","Provjeren dugogodišnji proces","Dobar omjer vrijednosti i troška"],
+    cons:["Manja efikasnost od monokristalnih","Lošije pri visokim temp.","Potrebna veća površina"],
+    apps:["Solarne farme","Off-grid sistemi","Projekti s nižim budžetom"]
+  },
+  thin:{
+    name:"Thin Film – Tanki film (CdTe)",sub:"First Solar Series 7 TR1 – Utility scale",icon:"🌫️",
+    eff:"18.1 – 19.3%",ex:"First Solar Series 7 TR1, 540W CdTe, 2300×1216 mm",
+    warranty:"30 godina linearno",weight:"39.7 kg",dims:"2300×1216 mm",
+    voc:"227.7 V",isc:"3.06 A",pmax:"540 W",tc:"-0.32 %/°C",
+    pros:["Najniži zagarantovani pad (0.3%/god)","Superioran pri visokim temp.","Odlično radi pri difuznom svjetlu","30-godišnja linearna garancija","Dizajniran i proizveden u SAD"],
+    cons:["Zahtijeva veliku instalacionu površinu","Kadmij – ekološki aspekti","Frameless – specifična montaža"],
+    apps:["Utility-scale solarne elektrane","Hladna i oblačna područja","Industrijska postrojenja"]
+  },
+  bifacial:{
+    name:"Bifacijalni panel",sub:"JA Solar MBB Bifacial PERC – Staklo/Staklo",icon:"🪟",
+    eff:"19.7 – 20.6% + do 25% pozadi",ex:"JA Solar JAM78D10-455/MB/1500V, 156 ćelija, staklo-staklo",
+    warranty:"30 godina linearno",weight:"29.0 kg",dims:"2198×1005×35 mm",
+    voc:"53.85 V",isc:"10.50 A",pmax:"455 W (do 544 W s 25% bif.)",tc:"-0.354 %/°C",
+    pros:["Energija sa obje strane panela","Bifaciality: 70% ±10%","Staklo-staklo za veću trajnost","30-god garancija, 0.5%/god degradacija"],
+    cons:["Zahtijeva reflektivnu podlogu","Složenija montaža i instalacija","Optimalan samo na otvorenim prostorima"],
+    apps:["Otvorene solarne farme","Industrijska postrojenja","Reflektivne podloge (bijeli šljunak, beton)"]
+  },
+  perc:{
+    name:"PERC Monokristalni panel",sub:"Pasivizirana zadnja ćelija – Napredna tehnologija",icon:"🔋",
+    eff:"20.7 – 21.5%",ex:"Sankopower 450W Mono PERC Half-Cell, 132 ćelije 182 mm",
+    warranty:"25 godina linearno",weight:"24 kg",dims:"1909×1134×35 mm",
+    voc:"41.25 V",isc:"13.89 A",pmax:"450 W",tc:"-0.35 %/°C",
+    pros:["Viša efikasnost od standardnih mono panela","Odlično pri difuznom svjetlu","Niži temperaturni koeficijent","Anti-PID i Anti-LID zaštita","Half-cell – manje gubitaka pri zasjeni"],
+    cons:["Viša cijena od standardnih panela","Kompleksniji proizvodni proces"],
+    apps:["Moderni stambeni objekti","Komercijalna postrojenja","Sistemi s ograničenim prostorom"]
+  }
+};
+
+function score(answers){
+  const s={mono:0,poly:0,thin:0,bifacial:0,perc:0};
+  // Q1 location
+  if(answers[0]==="krov"){s.mono+=3;s.perc+=4;s.poly+=2}
+  if(answers[0]==="fasada"){s.thin+=5;s.mono+=1;s.perc+=1}
+  if(answers[0]==="farma"){s.bifacial+=5;s.poly+=4;s.thin+=3;s.mono+=1}
+  // Q2 system
+  if(answers[1]==="offgrid"){s.poly+=3;s.mono+=2;s.perc+=2}
+  if(answers[1]==="ongrid"){s.bifacial+=3;s.perc+=3;s.thin+=2;s.mono+=2}
+  if(answers[1]==="hibrid"){s.perc+=3;s.mono+=3;s.poly+=2}
+  // Q3 area
+  if(answers[2]==="mala"){s.perc+=5;s.mono+=4;s.poly-=1;s.thin-=2}
+  if(answers[2]==="srednja"){s.perc+=3;s.mono+=3;s.poly+=2}
+  if(answers[2]==="velika"){s.bifacial+=5;s.poly+=4;s.thin+=3}
+  // Q4 climate
+  if(answers[3]==="suncana"){s.mono+=3;s.perc+=3;s.bifacial+=4}
+  if(answers[3]==="umjerena"){s.perc+=3;s.poly+=3;s.mono+=2}
+  if(answers[3]==="hladna"){s.thin+=5;s.perc+=2;s.poly+=2}
+  // Q5 priority
+  if(answers[4]==="efikasnost"){s.perc+=4;s.mono+=3;s.bifacial+=3}
+  if(answers[4]==="cijena"){s.poly+=5;s.thin+=3;s.mono+=1}
+  if(answers[4]==="pouzdanost"){s.bifacial+=4;s.mono+=3;s.thin+=3;s.perc+=2}
+  return s;
+}
+
+function reason(pk,a){
+  const lm={krov:"krovu kuće",fasada:"fasadi zgrade",farma:"solarnoj farmi"};
+  const sm={offgrid:"off-grid sistemu",ongrid:"on-grid sistemu",hibrid:"hibridnom sistemu"};
+  const am={mala:"ograničenoj površini",srednja:"umjerenoj površini",velika:"velikoj površini"};
+  const cm={suncana:"sunčanoj klimi",umjerena:"umjerenoj klimi",hladna:"hladnoj/oblačnoj klimi"};
+  const pm={efikasnost:"maksimalnu efikasnost",cijena:"najbolji omjer cijene i performansi",pouzdanost:"dugotrajnu pouzdanost"};
+  const L=lm[a[0]],S=sm[a[1]],A=am[a[2]],C=cm[a[3]],P=pm[a[4]];
+  const r={
+    perc:`Za instalaciju na ${L} u ${S} sa ${A} i ${C}, PERC monokristalni panel je optimalan izbor. Pasivizirana zadnja ćelija povećava refleksiju svjetlosti i smanjuje rekombinaciju elektrona, čime se postiže efikasnost 20–22%. Half-cell dizajn minimizira gubitke pri djelomičnoj zasjeni. Prioritet "${P}" se savršeno uklapa jer PERC nudi superioran prinos po m² sa dugim vijekom od 25 godina uz Anti-PID i Anti-LID zaštitu.`,
+    mono:`Monokristalni panel je savršen za tvoje uvjete: instalacija na ${L} sa ${A} u ${C}. Jednokristalinični silicij visoke čistoće nudi efikasnost 18–24%, što znači manju potrebnu površinu za istu snagu. U ${S} ovaj panel osigurava stabilan prinos tokom cijele godine. S prioritetom "${P}", monokristalni panel pruža optimalan balans između performansi i trajnosti.`,
+    bifacial:`Bifacijalni panel je idealan! Instalacija na ${L} sa ${A} u ${C} – uvjeti koji savršeno odgovaraju bifacijalnoj tehnologiji. Prednja strana generiše 455 W, a zadnja koristi reflektovanu svjetlost za dodatnih 5–25% energije (bifaciality 70%). JA Solar JAM78D10 ima 30-godišnju garanciju sa degradacijom svega 0.5%/godišnje. U ${S} to znači maksimalan energetski prinos tokom cijelog vijeka, sa prioritetom "${P}".`,
+    thin:`Za ${L} u ${C}, tanki film (CdTe) je jedinstven izbor. First Solar Series 7 TR1 ima najniži zagarantovani koeficijent degradacije u industriji (0.3%/god) – što znači >89% snage i nakon 30 godina. Superioran pri difuznom svjetlu i visokim temperaturama, temperaturni koeficijent je samo -0.32%/°C. Sistem 1500V DC smanjuje troškove instalacije. Sa prioritetom "${P}", 30-godišnja garancija garantira maksimalnu ukupnu vrijednost.`,
+    poly:`Polikristalni panel je pametno rješenje! Na ${L} sa ${A} u ${S}, polikristalni paneli nude dokazanu pouzdanost uz povoljniju cijenu. S prioritetom "${P}", ovi paneli su industrijski standard za projekte gdje se traži dobar omjer troška i prinosa. Efikasnost 18–19% je odlična za tvoje uvjete, a niža cijena po Wattu omogućava instalaciju veće ukupne snage unutar budžeta.`
+  };
+  return r[pk]||"Na osnovu tvojih odgovora, preporučujemo ovaj panel kao optimalni izbor.";
+}
+
+let cq=0,answers=[];
+
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'})}
+
+function startQuiz(){
+  document.getElementById('start-screen').classList.add('hidden');
+  document.getElementById('quiz-container').classList.remove('hidden');
+  document.getElementById('result-container').classList.add('hidden');
+  document.getElementById('quiz-section').scrollIntoView({behavior:'smooth',block:'start'});
+  cq=0;answers=[];renderQ();
+}
+
+function renderQ(){
+  const q=questions[cq];
+  const pct=Math.round(((cq+1)/5)*100);
+  document.getElementById('pb-lbl').textContent=`Pitanje ${cq+1} od 5`;
+  document.getElementById('pb-pct').textContent=`${pct}%`;
+  document.getElementById('pb-fill').style.width=`${pct}%`;
+  document.querySelectorAll('.dot').forEach((d,i)=>{
+    d.className='dot';
+    if(i<cq)d.classList.add('done');
+    else if(i===cq)d.classList.add('active');
+  });
+  const sel=answers[cq];
+  document.getElementById('q-container').innerHTML=`
+    <div class="qcard">
+      <div class="qnum">Pitanje ${cq+1} / 5</div>
+      <h2 class="qtxt">${q.text}</h2>
+      <p class="qhint">${q.hint}</p>
+      <div class="og">
+        ${q.opts.map(o=>`
+          <button class="ob${sel===o.id?' sel':''}" onclick="pick('${o.id}',this)">
+            <span class="oi">${o.icon}</span>
+            <div class="ot"><div class="ott">${o.t}</div><div class="ots">${o.s}</div></div>
+            <div class="ora"></div>
+          </button>`).join('')}
+      </div>
+      <div class="qnav">
+        <button class="btn-ghost" onclick="prevQ()" ${cq===0?'style="opacity:0;pointer-events:none"':''}>← Nazad</button>
+        <button class="btn-next" id="nxt" onclick="nextQ()" ${sel?'':'disabled'}>
+          ${cq<4?'Sljedeće →':'🎯 Vidi preporuku'}
+        </button>
+      </div>
+    </div>`;
+}
+
+function pick(id,btn){
+  btn.parentElement.querySelectorAll('.ob').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  answers[cq]=id;
+  document.getElementById('nxt').disabled=false;
+}
+
+function nextQ(){
+  if(!answers[cq])return;
+  if(cq<4){cq++;renderQ();}else{showResult();}
+}
+
+function prevQ(){if(cq>0){cq--;renderQ();}}
+
+function showResult(){
+  document.getElementById('quiz-container').classList.add('hidden');
+  const sc=score(answers);
+  const sorted=Object.entries(sc).sort((a,b)=>b[1]-a[1]);
+  const top=sorted[0][0];
+  const p=panels[top];
+  const maxSc=sorted[0][1];
+  const nameMap={mono:"Monokristalni",poly:"Polikristalni",thin:"Tanki Film",bifacial:"Bifacijalni",perc:"PERC"};
+
+  const rc=document.getElementById('result-container');
+  rc.classList.remove('hidden');
+  rc.innerHTML=`
+    <div class="rcard">
+      <div class="rhdr">
+        <div class="rbadge">✅ Vaša preporuka</div>
+        <div style="font-size:2.4rem;margin-bottom:10px">${p.icon}</div>
+        <div class="rpname">${p.name}</div>
+        <div class="rpsub">${p.sub}</div>
+        <div class="reff">${p.eff} efikasnosti</div>
+      </div>
+      <div class="rbody">
+        <div class="rtitle">📝 Zašto ovaj panel?</div>
+        <div class="reason"><p>${reason(top,answers)}</p></div>
+
+        <div class="rtitle">⚙️ Tehničke specifikacije</div>
+        <div class="sg2">
+          <div class="si"><div class="si-l">Maks. snaga (Pmax)</div><div class="si-v">${p.pmax}</div></div>
+          <div class="si"><div class="si-l">Efikasnost modula</div><div class="si-v">${p.eff}</div></div>
+          <div class="si"><div class="si-l">Napon otv. kola (Voc)</div><div class="si-v">${p.voc}</div></div>
+          <div class="si"><div class="si-l">Struja kratkog spoja (Isc)</div><div class="si-v">${p.isc}</div></div>
+          <div class="si"><div class="si-l">Dimenzije (L×W×H)</div><div class="si-v">${p.dims}</div></div>
+          <div class="si"><div class="si-l">Temp. koef. Pmax</div><div class="si-v">${p.tc}</div></div>
+          <div class="si"><div class="si-l">Masa modula</div><div class="si-v">${p.weight}</div></div>
+          <div class="si"><div class="si-l">Garancija performansi</div><div class="si-v">${p.warranty}</div></div>
+        </div>
+
+        <div style="background:rgba(11,61,92,.05);border-radius:var(--r);padding:14px;margin-bottom:22px">
+          <div class="rtitle" style="margin-bottom:6px">🏷️ Primjer iz kataloga</div>
+          <div style="font-size:.88rem;color:var(--primary);font-weight:600">${p.ex}</div>
+        </div>
+
+        <div class="rtitle">Prednosti i nedostaci</div>
+        <div class="pcg">
+          <div class="pl"><h4>✓ Prednosti</h4><ul>${p.pros.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+          <div class="cl"><h4>✗ Nedostaci</h4><ul>${p.cons.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+        </div>
+
+        <div class="rtitle">🎯 Idealna primjena</div>
+        <div class="chips">${p.apps.map(x=>`<span class="chip">${x}</span>`).join('')}</div>
+
+        <div class="rtitle">📊 Bodovanje svih tipova panela</div>
+        <div style="background:var(--bg);border-radius:var(--r);padding:18px;margin-bottom:26px">
+          ${sorted.map(([k,v],i)=>`
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:${i<4?'9px':'0'}">
+              <div style="width:118px;font-size:.78rem;font-weight:${i===0?700:400};color:${i===0?'var(--primary)':'var(--muted)'}">
+                ${panels[k].icon} ${nameMap[k]}
+              </div>
+              <div style="flex:1;height:8px;background:var(--border);border-radius:50px;overflow:hidden">
+                <div style="height:100%;width:${Math.round((v/maxSc)*100)}%;background:${i===0?'linear-gradient(90deg,var(--secondary),var(--accent))':'#d1dce6'};border-radius:50px;transition:width 1s ease"></div>
+              </div>
+              <div style="width:28px;font-size:.76rem;font-weight:700;color:${i===0?'var(--accent)':'var(--faint)'}">${v}</div>
+            </div>`).join('')}
+        </div>
+
+        <div class="ract">
+          <button class="btn-primary" onclick="restartQuiz()">🔄 Ponovi analizu</button>
+          <button class="btn-restart" onclick="scrollToTop()">↑ Na vrh stranice</button>
+        </div>
+      </div>
+    </div>`;
+  rc.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function restartQuiz(){
+  document.getElementById('result-container').classList.add('hidden');
+  document.getElementById('start-screen').classList.remove('hidden');
+  document.getElementById('quiz-container').classList.add('hidden');
+  cq=0;answers=[];
+  document.getElementById('quiz-section').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
