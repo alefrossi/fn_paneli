@@ -187,7 +187,45 @@ footer span{color:#fff;font-weight:600}
 .faq-item.open .arr{transform:rotate(180deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height 400ms ease,padding 300ms ease;font-size:.84rem;color:var(--muted);line-height:1.7;padding:0 18px;background:var(--bg)}
 .faq-item.open .faq-a{max-height:300px;padding:14px 18px}
-@media(max-width:768px){.edu-grid{grid-template-columns:1fr}.facts-grid{grid-template-columns:repeat(2,1fr)}}
+/* Pros/Cons */
+.pros-cons-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:4px}
+.pros-col,.cons-col{border-radius:10px;padding:18px 20px}
+.pros-col{background:#f0fdf4;border:1px solid #bbf7d0}
+.cons-col{background:#fff5f5;border:1px solid #fecaca}
+.pros-title,.cons-title{font-weight:700;font-size:.88rem;margin-bottom:10px;letter-spacing:.3px}
+.pros-title{color:#16a34a}
+.cons-title{color:#dc2626}
+.pros-list,.cons-list{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px}
+.pros-list li,.cons-list li{font-size:.84rem;line-height:1.55;color:var(--text)}
+/* Comparative analysis */
+.comp-section{margin-top:48px;padding-top:36px;border-top:2px solid var(--secondary)}
+.comp-section h2{font-size:1.4rem;font-weight:800;color:var(--primary);margin-bottom:6px}
+.comp-section .comp-intro{color:var(--muted);font-size:.9rem;margin-bottom:28px}
+.comp-block{margin-bottom:36px}
+.comp-block h3{font-size:1.05rem;font-weight:700;color:var(--primary);margin-bottom:16px;padding-left:12px;border-left:4px solid var(--secondary)}
+.eff-bars{display:flex;flex-direction:column;gap:10px}
+.eff-row{display:grid;grid-template-columns:140px 1fr 60px;align-items:center;gap:12px}
+.eff-label{font-size:.85rem;font-weight:600;color:var(--text)}
+.eff-bar-wrap{background:#e8edf2;border-radius:20px;height:18px;overflow:hidden}
+.eff-bar{height:100%;border-radius:20px;transition:width .6s ease}
+.eff-val{font-size:.82rem;font-weight:700;color:var(--muted);text-align:right}
+.app-matrix{width:100%;border-collapse:collapse;font-size:.83rem}
+.app-matrix th{background:var(--primary);color:#fff;padding:10px 14px;text-align:center;font-weight:600}
+.app-matrix td{padding:9px 14px;border-bottom:1px solid #e8edf2;text-align:center;color:var(--text)}
+.app-matrix tr:hover td{background:#f0f6fb}
+.app-matrix td:first-child{text-align:left;font-weight:600}
+.star-2{color:#16a34a;font-weight:700}
+.star-1{color:#4A9ECF}
+.star-0{color:#aaa}
+.recycle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rec-card{background:var(--bg);border:1px solid #dce6f0;border-radius:10px;padding:16px}
+.rec-card h4{font-size:.88rem;font-weight:700;color:var(--primary);margin-bottom:8px}
+.rec-card p{font-size:.81rem;line-height:1.6;color:var(--muted);margin:0}
+.rec-badge{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-bottom:8px}
+.rec-green{background:#dcfce7;color:#16a34a}
+.rec-yellow{background:#fef9c3;color:#b45309}
+.rec-red{background:#fee2e2;color:#dc2626}
+@media(max-width:768px){.edu-grid{grid-template-columns:1fr}.facts-grid{grid-template-columns:repeat(2,1fr)}.pros-cons-grid{grid-template-columns:1fr}.recycle-grid{grid-template-columns:1fr}.eff-row{grid-template-columns:110px 1fr 50px}.app-matrix{font-size:.75rem}}
 @media(max-width:480px){.facts-grid{grid-template-columns:1fr}.etab{padding:10px 14px;font-size:.79rem}}
 .hidden{display:none!important}
 @media(max-width:768px){.sg{grid-template-columns:1fr}.sg2,.pcg{grid-template-columns:1fr}.qcard{padding:22px}.rhdr,.rbody{padding:24px}.pg{grid-template-columns:repeat(2,1fr)}}
@@ -335,6 +373,471 @@ footer span{color:#fff;font-weight:600}
         <p>Dobiješ detaljan prikaz preporučenog panela sa specifikacijama, prednostima i primjerima.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- EDUCATIONAL SECTION -->
+<section id="edu-section">
+  <div class="wrap">
+    <div class="sh">
+      <div class="sl">Edukativni Centar</div>
+      <h2 class="st">Nauči sve o FN panelima</h2>
+      <p class="ss">Odaberi tip panela i istraži princip rada, proces proizvodnje, ključne parametre i zanimljivosti.</p>
+    </div>
+
+    <!-- TAB NAV -->
+    <div class="edu-tabs" id="edu-tabs">
+      <button class="etab active" onclick="showTab('mono')">⬛ Monokristalni</button>
+      <button class="etab" onclick="showTab('poly')">🔷 Polikristalni</button>
+      <button class="etab" onclick="showTab('thin')">🌫️ Tanki Film</button>
+      <button class="etab" onclick="showTab('bifacial')">🪟 Bifacijalni</button>
+      <button class="etab" onclick="showTab('perc')">🔋 PERC</button>
+    </div>
+
+    <!-- MONO -->
+    <div class="epanel active" id="epanel-mono">
+      <div class="facts-grid">
+        <div class="fact"><div class="fact-val">24%</div><div class="fact-lbl">Maksimalna komercijalna efikasnost</div></div>
+        <div class="fact"><div class="fact-val">25 god</div><div class="fact-lbl">Tipična garancija performansi</div></div>
+        <div class="fact"><div class="fact-val">1954.</div><div class="fact-lbl">Godina prvog monokristalnog panela (Bell Labs)</div></div>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <h3>⚛️ Princip rada</h3>
+          <p>Monokristalni panel funkcioniše na osnovu <strong>fotonaponskog efekta</strong> (otkriće: Einstein, 1905). Kada foton sunčeve svjetlosti udari u atom silicija, oslobađa elektron koji postaje slobodan nosač naboja.</p>
+          <p>Silicijeva ćelija ima p-n spoj – granicu između pozitivno (p) i negativno (n) dopiranog silicija. Električno polje na p-n spoju tjera slobodne elektrone prema n-strani, čime se stvara jednosmjerna električna struja.</p>
+          <p>Monokristalni silicij nudi najmanje kristalnih granica (grešaka u mreži), što znači manji broj rekombinacija elektrona i višu efikasnost od ostalih kristalnih tipova.</p>
+        </div>
+        <div class="edu-card">
+          <h3>📍 Gdje se koristi</h3>
+          <div class="edu-steps">
+            <div class="edu-step"><div class="edu-step-n">🏠</div><p><strong>Stambeni krovovi</strong> – najpopularniji izbor za kuće zahvaljujući visokoj efikasnosti na ograničenoj krovnoj površini.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🏢</div><p><strong>Poslovni objekti</strong> – komercijalne instalacije gdje je ključan maksimalan prinos po m² krova.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🔋</div><p><strong>Off-grid sistemi</strong> – karavani, plovila i udaljeni objekti gdje svaki watt i svaki cm² broje.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🏗️</div><p><strong>BIPV integracija</strong> – ugradnja u arhitekturu (krovne ploče, nadstrešnice) zahvaljujući kompaktnom dizajnu.</p></div>
+            <div class="edu-step"><div class="edu-step-n">❄️</div><p><strong>Hladne klime</strong> – odličan izbor za sjeverne regije jer mono paneli imaju bolji prinos pri niskim temperaturama.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="edu-card-full">
+        <h3>⚖️ Prednosti i mane</h3>
+        <div class="pros-cons-grid">
+          <div class="pros-col">
+            <div class="pros-title">✅ Prednosti</div>
+            <ul class="pros-list">
+              <li>Najviša komercijalna efikasnost (19–24%) – manje potrebne površine za istu snagu</li>
+              <li>Dugotrajnost – garancija performansi 25 godina, realni vijek 30+ godina</li>
+              <li>Bolji prinos pri difuznom (oblačnom) osvjetljenju nego polikristalni</li>
+              <li>Niži temperaturni koeficijent nego poly – bolje podnosi hladne uvjete</li>
+              <li>Estetski izgled – uniformna tamna boja bez šarenih kristalnih uzoraka</li>
+            </ul>
+          </div>
+          <div class="cons-col">
+            <div class="cons-title">❌ Mane</div>
+            <ul class="cons-list">
+              <li>Viša cijena po Wp u usporedbi s polikristalnim i thin-film panelima</li>
+              <li>Energetski intenzivan Czochralski proces povlačenja ingota (visoki EPBT)</li>
+              <li>Temp. koef. Pmax ≈ −0.40 %/°C – pada u snazi pri visokim ljetnim temperaturama</li>
+              <li>Zaobljeni uglovi ćelija smanjuju gustoću pakovanja unutar modula</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="edu-card-full">
+        <h3>📐 Ključni parametri i njihovo značenje</h3>
+        <table class="param-table">
+          <tr><td>Voc – napon praznog hoda</td><td>Maksimalni napon panela kada nema opterećenja. Ovisi o temperaturi: raste s hladnoćom (koef. ≈ −0.30 %/°C). Koristi se za dimenzionisanje invertera.</td></tr>
+          <tr><td>Isc – struja kratkog spoja</td><td>Maksimalna struja kada su terminali kratko spojeni. Proporcionalna je intenzitetu sunčevog zračenja. Gotovo ne ovisi o temperaturi.</td></tr>
+          <tr><td>Pmax – maks. snaga (MPP)</td><td>Snaga u tački maksimalne snage (Maximum Power Point). Mjeri se pri STC: 1000 W/m², 25°C, AM1.5G. Za Sankopower 450W mono = 450 W.</td></tr>
+          <tr><td>FF – faktor punjenja</td><td>Omjer stvarne MPP snage i produkta Voc×Isc. Visok FF (≥0.75) znači da je I-V krivulja "pravokutna" i da su unutarnji gubici mali.</td></tr>
+          <tr><td>Temp. koef. Pmax</td><td>Za mono: tipično −0.35 do −0.43 %/°C. Svaki °C porasta temperature smanjuje snagu za taj postotak – zato su hladniji dani produktivniji.</td></tr>
+          <tr><td>NOCT</td><td>Normalna radna temperatura ćelije (Nominal Operating Cell Temperature) pri 800 W/m², 20°C ambijentu, 1 m/s vjetru. Tipično 45±2°C.</td></tr>
+        </table>
+        <div class="tip-box"><strong>💡 Znaš li?</strong> Monokristalni ingot može biti dug i do 2 metra i težak 200 kg. Cijeli Czochralski proces za jedan ingot traje 2–4 dana u kontroliranoj atmosferi argona.</div>
+      </div>
+      <div class="faq">
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Zašto su monokristalni paneli zaobljenih uglova? <span class="arr">▼</span></button><div class="faq-a">Ingot iz Czochralski procesa je cilindričnog oblika. Kod rezanja na kvadratne wafer-e ostaju zaobljeni uglovi jer se ne reže do ruba kruga – to je kompromis između iskorištenosti silicija i efikasnosti pakovanja u modul.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Koliko je energije potrebno za proizvodnju mono panela? <span class="arr">▼</span></button><div class="faq-a">Energetski payback time (EPBT) za monokristalni panel iznosi 1.5–2.5 godine, zavisno od lokacije instalacije. Nakon toga panel 22+ godina generira "čistu" energiju bez emisija CO₂.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Da li monokristalni paneli rade na oblačno vrijeme? <span class="arr">▼</span></button><div class="faq-a">Da, ali s manjim prinosom. Pri 200 W/m² difuznog sunčevog zračenja (tipičan oblačan dan), mono panel generira oko 15–20% nominalne snage. Half-cell i PERC dizajn poboljšavaju prinos pri slabom osvjetljenju.</div></div>
+      </div>
+    </div>
+
+    <!-- POLY -->
+    <div class="epanel" id="epanel-poly">
+      <div class="facts-grid">
+        <div class="fact"><div class="fact-val">18%</div><div class="fact-lbl">Tipična maksimalna efikasnost</div></div>
+        <div class="fact"><div class="fact-val">~30%</div><div class="fact-lbl">Jeftiniji od monokristalnih</div></div>
+        <div class="fact"><div class="fact-val">1981.</div><div class="fact-lbl">Prva komercijalna instalacija polikristalnih panela</div></div>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <h3>⚛️ Princip rada</h3>
+          <p>Polikristalni silicij sadrži <strong>hiljade sitnih kristalnih zrna</strong> različite orijentacije. Na granicama između kristala dolazi do rekombinacije elektrona i šupljina – to su tzv. <em>grain boundary</em> gubici koji snižavaju efikasnost u odnosu na monokristalni Si.</p>
+          <p>Fotonaponski efekt je isti kao kod monokristalnog panela: foton izbija elektron, p-n spoj razdvaja naboje. Razlika je samo u broju kristalnih granica i manjoj mobilnosti nosača naboja.</p>
+          <p>Karakteristična plava šarena boja dolazi od silicij-nitridnog antirefleksionog premaza (SiNₓ) koji smanjuje odbijanje svjetlosti sa ~30% na &lt;4%.</p>
+        </div>
+        <div class="edu-card">
+          <h3>📍 Gdje se koristi</h3>
+          <div class="edu-steps">
+            <div class="edu-step"><div class="edu-step-n">🌱</div><p><strong>Solarne farme</strong> – projekti s dovoljno dostupnog prostora gdje niža cijena panela direktno snižava LCOE.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🏘️</div><p><strong>Ruralna elektrifikacija</strong> – electrification u sredinama sa ograničenim budžetom i dostupnim prostorima na krovovima.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🏭</div><p><strong>Industrijski krovovi</strong> – veliki ravni krovovi gdje površina nije ograničavajući faktor a cijena projekta jeste.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🔋</div><p><strong>Off-grid sistemi s prostorom</strong> – kuće na imanjima, vikendice, seoska domaćinstva s dostupnom južnom površinom.</p></div>
+            <div class="edu-step"><div class="edu-step-n">💰</div><p><strong>Projekti s ograničenim budžetom</strong> – svuda gdje je najniža cijena instalacije važnija od maksimalne efikasnosti po m².</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="edu-card-full">
+        <h3>⚖️ Prednosti i mane</h3>
+        <div class="pros-cons-grid">
+          <div class="pros-col">
+            <div class="pros-title">✅ Prednosti</div>
+            <ul class="pros-list">
+              <li>Niža cijena po Wp (15–25% jeftiniji od monokristalnih) – idealno za projekte ograničenog budžeta</li>
+              <li>Jednostavniji DSS proces livenja troši manje energije od Czochralski – manji EPBT</li>
+              <li>Kvadratne ćelije bez zaobljenih uglova – bolja gustoća pakovanja unutar modula</li>
+              <li>Zrela, pouzdana tehnologija s decenijama terenskih podataka</li>
+              <li>Dovoljan izbor za instalacije gdje prostor nije ograničavajući faktor</li>
+            </ul>
+          </div>
+          <div class="cons-col">
+            <div class="cons-title">❌ Mane</div>
+            <ul class="cons-list">
+              <li>Niža efikasnost (17–19%) – za istu snagu potrebno 10–15% više površine nego mono/PERC</li>
+              <li>Lošiji temperaturni koeficijent (−0.40 %/°C) – više gubi snage na ljetnim temperaturama</li>
+              <li>Slabiji prinos pri difuznom osvjetljenju zbog grain boundary gubitaka</li>
+              <li>Manji Fill Factor – više unutarnjih gubitaka pri visokim strujama</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="edu-card-full">
+        <h3>📐 Ključni parametri i usporedba s monokristalnim</h3>
+        <table class="param-table">
+          <tr><td>Efikasnost ćelije</td><td>18–19% (SolarSpace P1575BB104M8: 18.9–19.1%). Niža nego mono zbog kristalnih granica. Ista površina = manja snaga.</td></tr>
+          <tr><td>Temp. koef. Pmax</td><td>−0.40 %/°C – nešto lošiji od monokristalnog pri visokim temperaturama. Razlika postaje značajna kod instalacija u vrućim klimama.</td></tr>
+          <tr><td>Fill Factor (FF)</td><td>Tipično 0.72–0.76, malo niži od mono (0.75–0.80) zbog veće unutarnje otpornosti na grain boundaries.</td></tr>
+          <tr><td>Cijena po Wp</td><td>15–25% niža od monokristalnih panela iste snage, zahvaljujući jednostavnijem i energetski efikasnijem procesu livenja.</td></tr>
+          <tr><td>Anti-PID</td><td>Mnogi moderni polykristalni paneli imaju PID-Free tretman: silicij-oksid + silicij-nitrid ARK premaz koji sprječava Potencijalni indukovani pad (PID) čak pri −1500 V.</td></tr>
+        </table>
+        <div class="tip-box"><strong>💡 Znaš li?</strong> Polikristalni paneli su dugo bili dominantna tehnologija – 2012. godine imali su &gt;60% tržišnog udjela. Danas ih polako istiskuju PERC i monokristalni Half-cell paneli, ali ostaju popularni za projekte osjetljive na cijenu.</div>
+      </div>
+      <div class="faq">
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Zašto je polikristalni silicij plavičaste boje? <span class="arr">▼</span></button><div class="faq-a">Boja dolazi od antirefleksionog premaza od silicij-nitrida (SiNₓ). Taj sloj debljine ~80 nm interferira s vidljivom svjetlošću tako da odbojena plava komponenta dominira. Sam silicij je siv, ali premaz mu daje karakteristični plavi ton.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Je li polikristalni panel loš izbor u 2026. godini? <span class="arr">▼</span></button><div class="faq-a">Nije loš, ali je niša. Za projekte s ograničenim budžetom i dovoljnom površinom (solarne farme, off-grid sustavi) ostaje vrijedan. Za krovne instalacije gdje prostor ograničava snagu, mono/PERC je bolji izbor. Treba računati LCOE (levelized cost of energy), ne samo cijenu modula.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Šta je LID (Light Induced Degradation)? <span class="arr">▼</span></button><div class="faq-a">LID je pad snage od 1–3% koji se dešava u prvim satima rada panela na suncu. Uzrokovan je Borom-Kisik (B-O) defektima u p-tipa silicija. Moderni polikristalni paneli koriste Ga-dopiranje ili posebne tretmane koji minimiziraju ovaj efekat.</div></div>
+      </div>
+    </div>
+
+    <!-- THIN FILM -->
+    <div class="epanel" id="epanel-thin">
+      <div class="facts-grid">
+        <div class="fact"><div class="fact-val">0.3%</div><div class="fact-lbl">Najniži garantovani godišnji pad snage (First Solar)</div></div>
+        <div class="fact"><div class="fact-val">30 god</div><div class="fact-lbl">Linearna garancija performansi</div></div>
+        <div class="fact"><div class="fact-val">2–4 µm</div><div class="fact-lbl">Debljina aktivnog sloja (vs. 180 µm kod Si)</div></div>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <h3>⚛️ Princip rada i vrste</h3>
+          <p><strong>Amorfni silicij (a-Si):</strong> Silicij bez kristalne strukture nanesen na staklo ili foliju. Efikasnost 6–10%, ali odlično radi pri difuznom svjetlu i visokim temperaturama. Koristi se u kalkulatorima, prozorskim staklima.</p>
+          <p><strong>Kadmij-telurid (CdTe):</strong> Najpopularniji tankofilm za utility-scale. First Solar Series 7 TR1 postiže 19.3% efikasnost – izuzetno za tankoslojnu tehnologiju. CdTe apsorbira sunčevo svjetlo 100× efikasnije od Si.</p>
+          <p><strong>CIGS (Cu-In-Ga-Se):</strong> Kompozitni poluprovodnik s promjenjivim band-gapom podešavanjem omjera Ga/In. Efikasnost do 22% u laboratoriji.</p>
+        </div>
+        <div class="edu-card">
+          <h3>📍 Gdje se koristi</h3>
+          <div class="edu-steps">
+            <div class="edu-step"><div class="edu-step-n">⚡</div><p><strong>Utility-scale solarne farme</strong> – CdTe dominira u projektima 10–100+ MW zahvaljujući nižoj cijeni i odličnoj degradaciji (0.3%/god).</p></div>
+            <div class="edu-step"><div class="edu-step-n">🌧️</div><p><strong>Oblačne klime</strong> – viša osjetljivost na difuzno i UV svjetlo čini CdTe/CIGS idealnim za Sjevernu Europu i obalna područja.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🏗️</div><p><strong>BIPV – fasade i krovovi</strong> – amorfni silicij i CIGS dostupni su kao poluprozirno staklo za integraciju u fasade i prozore zgrada.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🚌</div><p><strong>Fleksibilne površine</strong> – a-Si na foliji omogućava ugradnju na krovove vozila, brodove i zaobljene površine.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🌡️</div><p><strong>Vrući klimati</strong> – niži temperaturni koeficijent (−0.32 %/°C) znači bolje performance u tropskim i pustinjskim regijama.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="edu-card-full">
+        <h3>⚖️ Prednosti i mane</h3>
+        <div class="pros-cons-grid">
+          <div class="pros-col">
+            <div class="pros-title">✅ Prednosti</div>
+            <ul class="pros-list">
+              <li>Najniži temperaturni koeficijent (−0.32 %/°C) – manje gubi snage na vrućim ljetnim danima</li>
+              <li>Odlična degradacija – First Solar garantuje max 0.3%/god (vs. 0.5–0.7% za Si)</li>
+              <li>Manji energetski otisak – EPBT samo 0.5–1 godina (vs. 1.5–2.5 za mono Si)</li>
+              <li>Bolja spektralna osjetljivost za difuzno i oblačno svjetlo</li>
+              <li>BIPV primjene – prozirnost prilagodljiva (10–50% propusnosti svjetla)</li>
+              <li>First Solar nudi zatvorenu petlju recikliranja CdTe materijala</li>
+            </ul>
+          </div>
+          <div class="cons-col">
+            <div class="cons-title">❌ Mane</div>
+            <ul class="cons-list">
+              <li>Niža efikasnost (18–20%) – potrebna veća površina za istu snagu nego kristalni Si</li>
+              <li>CdTe sadrži kadmij – zahtijeva posebno rukovanje pri zbrinjavanju (iako siguran u radu)</li>
+              <li>Ograničena dostupnost telurijuma – telur je rijedak element, može ograničiti skaliranje</li>
+              <li>Manji broj proizvođača na tržištu – manje opcija i konkurencije</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="edu-card-full">
+        <h3>📐 Ključni parametri i prednosti CdTe tehnologije</h3>
+        <table class="param-table">
+          <tr><td>Band gap</td><td>CdTe ima band gap 1.45 eV – gotovo savršeno poravnanje s distribucijom energije sunčevog spektra (teorijski optimum je 1.34 eV). To objašnjava visoku efikasnost apsorpcije.</td></tr>
+          <tr><td>Temp. koef. Pmax</td><td>−0.32 %/°C (First Solar TR1) – značajno bolji od mono Si (−0.35 do −0.43 %/°C). Na ljetnim temperaturama od 70°C, CdTe gubi manje snage.</td></tr>
+          <tr><td>Spektralna osjetljivost</td><td>CdTe je osjetljiviji na difuznu (oblačnu) komponentu svjetlosti i UV spektar nego kristalni Si. Zato ima viši prinos po kWh u oblačnim klimama.</td></tr>
+          <tr><td>Degradacija</td><td>First Solar garantuje max 0.3%/god pad snage – industrijska klasa za sebe. Nakon 30 godina: &gt;89% nominalne snage. Za Si panele tipično je 0.5–0.7%/god.</td></tr>
+          <tr><td>Napon sistema</td><td>Series 7 TR1 radi na 1500 V DC – veći naponi smanjuju strujne gubitke i kablovske troškove u velikim instalacijama.</td></tr>
+        </table>
+        <div class="tip-box"><strong>💡 Znaš li?</strong> CdTe ima manji ugljični otisak od monokristalnog Si – energetski payback time je samo 0.5–1 godina! First Solar nudi i globalni reciklažni program – sav CdTe se vraća u proizvodnju novih panela, pa je ekološka bilanca izvrsna unatoč kadmiju.</div>
+      </div>
+      <div class="faq">
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Je li kadmij u CdTe panelima opasan? <span class="arr">▼</span></button><div class="faq-a">U normalnim uvjetima rada – ne. CdTe je kemijski stabilan spoj, vrlo različit od metalnog kadmija. Enkapsuliran između dva sloja stakla, ne može "iscuriti" u okoliš. First Solar ima dokazano zatvorenu petlju reciklaže i sertifikate za sve relevantne propise. Jedini rizik bio bi u slučaju požara, koji se i za Si panele smatra zanemarivim.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Zašto tankoslojni paneli zauzimaju više prostora? <span class="arr">▼</span></button><div class="faq-a">Niža efikasnost (~19% za CdTe vs. ~21% za PERC) znači da je za istu snagu potrebno više površine. Npr. za 1 MWp solarnog parka: CdTe treba ~5200 m², mono PERC treba ~4800 m². Za utility projekte ta razlika nije problem jer prostor nije ograničen, ali za krovne instalacije CdTe nije idealan.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Može li se tanki film ugraditi u fasadu zgrade? <span class="arr">▼</span></button><div class="faq-a">Da! Upravo je to jedna od glavnih prednosti, posebno amorfnog silicija koji je dostupan kao fleksibilna folija ili u obliku BIPV stakla (Building Integrated PV). Transparentnost se može podešavati – postoje fasadni paneli koji propuštaju 10–50% svjetla i istovremeno generiraju struju.</div></div>
+      </div>
+    </div>
+
+    <!-- BIFACIAL -->
+    <div class="epanel" id="epanel-bifacial">
+      <div class="facts-grid">
+        <div class="fact"><div class="fact-val">70%</div><div class="fact-lbl">Bifaciality factor (JA Solar JAM78D10)</div></div>
+        <div class="fact"><div class="fact-val">+25%</div><div class="fact-lbl">Max. dodatna energija sa zadnje strane</div></div>
+        <div class="fact"><div class="fact-val">0.5%</div><div class="fact-lbl">Garantovani godišnji pad snage (30 godina)</div></div>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <h3>⚛️ Princip rada</h3>
+          <p><strong>Bifaciality (dvostrana apsorpcija)</strong> omogućava da panel prima sunčevu svjetlost sa obje strane. Prednja strana apsorbira direktnu insolaciju, a zadnja strana apsorbira <em>albedo</em> – reflektovanu svjetlost od tla, zgrada ili oblaka.</p>
+          <p>Ćelija je ista kao PERC mono – pasivizirana zadnja strana. Razlika je što nema neprozirnog backsheet-a: umjesto njega koristi se prozirno staklo (glass-glass konstrukcija). To dozvoljava prolaz reflektovane svjetlosti do zadnje strane ćelije.</p>
+          <p><strong>Bifaciality factor</strong> = Pmax,zadnja / Pmax,prednja × 100%. Za JA Solar JAM78D10: 70% ±10%.</p>
+        </div>
+        <div class="edu-card">
+          <h3>📍 Gdje se koristi</h3>
+          <div class="edu-steps">
+            <div class="edu-step"><div class="edu-step-n">🌾</div><p><strong>Agrivoltaika</strong> – kombinacija solarnih panela i poljoprivrede na istom zemljištu, gdje refleksija tla povećava prinos zadnje strane.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🅿️</div><p><strong>Parking nadstrešnice</strong> – bijeli beton ili asfalt reflektuje svjetlost prema zadnjoj strani; paralelno se obezbjeđuje hlad za vozila.</p></div>
+            <div class="edu-step"><div class="edu-step-n">❄️</div><p><strong>Snježne regije</strong> – albedo snijega do 0.90 drastično povećava zimski prinos zadnje strane bifacijalnog panela.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🌱</div><p><strong>Solarne farme na bijelom šljunku/betonu</strong> – albedo 0.25–0.40, realni BIFI Gain 8–12% godišnje.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🔲</div><p><strong>Vertikalne ograde i nadstrešnice</strong> – montaža pod 90° istok-zapad daje dva energetska pika (jutro + popodne) umjesto jednog podnevnog.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="edu-card-full">
+        <h3>⚖️ Prednosti i mane</h3>
+        <div class="pros-cons-grid">
+          <div class="pros-col">
+            <div class="pros-title">✅ Prednosti</div>
+            <ul class="pros-list">
+              <li>+5–25% više energije od zadnje strane u povoljnim uvjetima (reflektivna podloga, otvoreni teren)</li>
+              <li>Glass-glass konstrukcija – duži vijek (30+ god.), otpornost na vlagu, UV i PID</li>
+              <li>Snijeg i bijele površine povećavaju prinos – komparativna prednost u zimskim klimama</li>
+              <li>Vertikalna montaža daje ravnomjerniji dnevni profil i bolje prati potrošnju</li>
+              <li>30-godišnja linearna garancija performansi</li>
+            </ul>
+          </div>
+          <div class="cons-col">
+            <div class="cons-title">❌ Mane</div>
+            <ul class="cons-list">
+              <li>Za krovne instalacije nema koristi od zadnje strane – cijena glass-glass nije opravdana</li>
+              <li>Teža konstrukcija (glass-glass) zahtijeva robusnije nosače i povećava troškove montaže</li>
+              <li>BIFI Gain ovisi o podlozi, visini i zasjeni – teže precizno modelirati (neophodno PVsyst)</li>
+              <li>Viša nabavna cijena u usporedbi sa standardnim mono/PERC modulima iste snage</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="edu-card-full">
+        <h3>📐 Ključni parametri JA Solar JAM78D10-455/MB</h3>
+        <table class="param-table">
+          <tr><td>MBB (Multi Busbar)</td><td>156 ćelija, 6×26 konfiguracija sa više tankih srebrnih busbar-a. MBB smanjuje strujne gubitke i povećava pouzdanost – pukotina jednog busbar-a ne isključuje cijelu ćeliju.</td></tr>
+          <tr><td>Glass-Glass konstrukcija</td><td>Prednje i zadnje staklo, svako 2.0 mm. Bez plastičnog backsheet-a – veća otpornost na vlagu, UV degradaciju i PID. Vijek modula: 30+ godina.</td></tr>
+          <tr><td>Backside power gain</td><td>Pri 5% albedo: +22 W (457 W ukupno). Pri 25% albedo: +89 W (544 W ukupno). Realni prinos u terenu: +5–15% godišnje u zavisnosti od podloge i konfiguracije.</td></tr>
+          <tr><td>Temp. koef. Pmax</td><td>−0.354 %/°C. Nešto lošiji od standardnog PERC zbog debljeg stakla, ali 30-godišnja garancija pokriva gubitke dugoročno.</td></tr>
+          <tr><td>IP68 priključna kutija</td><td>Vodootporna priključna kutija s 3 bypass diode. Portrait kabel: 300 mm (+) / 400 mm (−). Landscape: 1200 mm svaki.</td></tr>
+        </table>
+        <div class="tip-box"><strong>💡 Znaš li?</strong> Bifacijalni paneli montirani vertikalno (90°) na istok-zapad orijentaciju imaju jedinstven profil proizvodnje: dva pika – ujutro (istočna strana) i popodne (zapadna strana). Ovakva konfiguracija bolje prati potražnju za strujom tokom dana nego standardni monofacijalni paneli koji imaju samo jedan podnevni pik.</div>
+      </div>
+      <div class="faq">
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Da li bifacijalni panel vrijedi instalirati na krov kuće? <span class="arr">▼</span></button><div class="faq-a">Uglavnom ne – krov ne pruža reflektivnu podlogu ispod panela, pa se zadnja strana ne može koristiti. Bifacijalni paneli daju prednost samo na otvorenom terenu gdje postoji prostor ispod panela i reflektivna podloga. Za krovove, standardni PERC mono panel pruža bolji omjer cijene i performansi.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Kako mjeriti stvarni prinos bifacijalnog sistema? <span class="arr">▼</span></button><div class="faq-a">Koristi se pojam BIFI Gain = (godišnja energija bifacial / godišnja energija monofacial − 1) × 100%. Za tipičnu solarnu farmu s bijelim šljunkom pri 20% albedo, BIFI Gain je 8–12%. Simulacija u software-u kao PVsyst nudi bifacial modul od verzije 6.63.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Koliko duže traje glass-glass modul od standardnog? <span class="arr">▼</span></button><div class="faq-a">Glass-glass moduli imaju značajno sporiju degradaciju boje EVA enkapsulanta (yellowing) i otpornost na vlagu jer plastični backsheet nije prisutan. Industrija procjenjuje produženi vijek na 30–35 godina za glass-glass vs. 25–30 za glass-backsheet. JA Solar nudi 30-godišnju linearnu garanciju, dok standardni mono paneli nude 25 godina.</div></div>
+      </div>
+    </div>
+
+    <!-- PERC -->
+    <div class="epanel" id="epanel-perc">
+      <div class="facts-grid">
+        <div class="fact"><div class="fact-val">+1%</div><div class="fact-lbl">Apsolutni prirast efikasnosti vs. standardni mono</div></div>
+        <div class="fact"><div class="fact-val">1989.</div><div class="fact-lbl">Godina izuma PERC tehnologije (UNSW, Sydney)</div></div>
+        <div class="fact"><div class="fact-val">Half-cell</div><div class="fact-lbl">Svaka ćelija rezana na pola – manje gubitaka struje</div></div>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <h3>⚛️ Princip rada – šta je pasivizacija?</h3>
+          <p>Standardna solarna ćelija gubi dio elektrona na <strong>zadnjoj metalnoj površini</strong> zbog rekombinacije – elektroni se "izgube" umjesto da doprinesu struji. To se zove <em>surface recombination</em>.</p>
+          <p>PERC (Passivated Emitter and Rear Cell) dodaje <strong>pasivizacijski sloj</strong> na zadnju stranu ćelije – tanak film SiO₂ ili Al₂O₃ koji električki "blokira" rekombinacijska mjesta i smanjuje gubitke.</p>
+          <p>Zadnji pasivizacijski sloj ima i <strong>lokalne kontakte</strong> – male otvore kroz koje struja prolazi dok se ostatak pasivizira. Ovo povećava efikasnost za 0.5–1% apsolutno.</p>
+          <p>Dodatan efekat: pasivizacijski sloj reflektuje IR zrake nazad kroz ćeliju – <em>second pass absorption</em> – što povećava prinos pri dugovalnoj svjetlosti.</p>
+        </div>
+        <div class="edu-card">
+          <h3>📍 Gdje se koristi</h3>
+          <div class="edu-steps">
+            <div class="edu-step"><div class="edu-step-n">🏠</div><p><strong>Stambeni krovovi</strong> – zlatni standard za kućne instalacije: visoka efikasnost, prihvatljiva cijena, 25-godišnja garancija.</p></div>
+            <div class="edu-step"><div class="edu-step-n">⚡</div><p><strong>Hibridni sistemi</strong> – visoka energetska gustina smanjuje broj panela i baterijskih ciklusa potrebnih za pokriće potrošnje.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🌳</div><p><strong>Mjesta s parcijalnom zasjenom</strong> – Half-Cell konfiguracija osigurava da zasjena dijela panela (drvo, dimnjak, antena) ne blokira cijeli sustav.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🏭</div><p><strong>Komercijalne instalacije</strong> – industrijski krovovi gdje se želi maksimalni prinos uz prihvatljivu investiciju.</p></div>
+            <div class="edu-step"><div class="edu-step-n">🌡️</div><p><strong>Umjerene i hladne klime</strong> – gallij-dopirani silicij eliminira LID efekat, što PERC čini pouzdanijim u varijabilnim temperaturnim uvjetima.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="edu-card-full">
+        <h3>⚖️ Prednosti i mane</h3>
+        <div class="pros-cons-grid">
+          <div class="pros-col">
+            <div class="pros-title">✅ Prednosti</div>
+            <ul class="pros-list">
+              <li>Visoka efikasnost (20–22%) uz razumnu cijenu – najbolji omjer učinka i investicije na tržištu</li>
+              <li>Anti-LID (Ga-dopiranje) i Anti-PID tehnologija – dugotrajna stabilnost snage</li>
+              <li>Half-Cell dizajn – otpornost na parcijalnu zasjenu i manji Ohm-ovi gubici</li>
+              <li>Pasivizacijski sloj reflektuje IR zrake – second pass apsorpcija povećava prinos</li>
+              <li>Kompatibilan s 1500 V DC sistemima – skalabilan za veće instalacije</li>
+            </ul>
+          </div>
+          <div class="cons-col">
+            <div class="cons-title">❌ Mane</div>
+            <ul class="cons-list">
+              <li>Skuplje od standardnog polikristalnog silicija – viša početna investicija</li>
+              <li>LeTID (Light and elevated Temperature Induced Degradation) – specifičan problem PERC ćelija pri visokim temperaturama, mada sve rjeđi kod novijih generacija</li>
+              <li>Složeniji proizvodni proces od standardnog mono (dodatan korak pasivizacije)</li>
+              <li>Polako ga zamjenjuje TOPCon koji pruža 23–24% efikasnosti uz sličnu cijenu</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="edu-card-full">
+        <h3>📐 Ključni parametri i tehnološki napredak</h3>
+        <table class="param-table">
+          <tr><td>Anti-PID</td><td>PID (Potential Induced Degradation) nastaje kada visoki napon sistema tjera laktive jone natrijuma kroz enkapsulant u ćeliju. PERC paneli koriste posebnu EVA foliju i antirefleksioni premaz koji sprječavaju PID. Sertificirani su za 1500 V DC sisteme.</td></tr>
+          <tr><td>Anti-LID</td><td>Light Induced Degradation – pad snage pri prvom izlaganju suncu. PERC paneli koriste gallij-dopirani p-tip silicij umjesto bor-dopiranog, što eliminiše B-O defekte i LID efekt.</td></tr>
+          <tr><td>PERC vs. TOPCon</td><td>TOPCon (Tunnel Oxide Passivated Contact) je nasljedna tehnologija – pasivizira i prednji i zadnji kontakt. TOPCon postiže 22–24% vs. PERC 20–22%. PERC je zrelija i jeftinija tehnologija, TOPCon je budućnost.</td></tr>
+          <tr><td>Half-cell br. ćelija</td><td>Sankopower 450W: 120 Half-Cell (2×60). Sankopower 550W: 144 Half-Cell (2×72). Broj ćelija određuje napon stringa i kompatibilnost s inverterom.</td></tr>
+          <tr><td>Bifacial PERC</td><td>Kombinacija PERC pasivizacije i glass-glass konstrukcije = bifacijalni PERC. JA Solar JAM78D10 je upravo taj tip – maksimalna sinergija obje tehnologije.</td></tr>
+        </table>
+        <div class="tip-box"><strong>💡 Znaš li?</strong> Efikasnost od 26.7% je trenutni svjetski rekord za jednokristalinični silicij (Kaneka, Japonska, 2017). Komercijalni PERC paneli dosežu 22%, a razlika dolazi od savršenih laserskih kontakata i pasivizacije u laboratorijskim uvjetima koje je teško skalirati na masovnu proizvodnju.</div>
+      </div>
+      <div class="faq">
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Koja je razlika između PERC, PERL i PERT? <span class="arr">▼</span></button><div class="faq-a">PERC – pasivizacija samo zadnje strane. PERL (Passivated Emitter, Rear Locally-diffused) – lokalno difundovani zadnji kontakti za još manje rekombinacije, postiže više laboratorijske efikasnosti. PERT (Passivated Emitter, Rear Totally-diffused) – totalno difundovana zadnja strana, koristi se kod bifacijalnih panela. PERC je jedini koji se masovno komercijalno proizvodi.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Kako Half-Cell pomaže kod djelomične zasjenjenosti? <span class="arr">▼</span></button><div class="faq-a">U standardnom panelu, jedan zasjenjeni string blokira cijeli strujni krug. U Half-Cell panelu, gornja i donja polovica imaju neovisna dva strujne kruga spojena u paraleli. Dakle, zasjena gornje polovice ne utječe na donju – panel nastavlja raditi s 50% kapaciteta umjesto pada na gotovo nulu.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Hoće li PERC biti zamijenjen TOPCon-om? <span class="arr">▼</span></button><div class="faq-a">Postepeno da. TOPCon (Tunnel Oxide Passivated Contact) pasivizira i prednji i zadnji kontakt, postiže 23–24% efikasnosti. Već 2023/24. veliki kineski proizvođači (Jinko, LONGi, Trina) masovno prelaze na TOPCon. PERC će ostati u upotrebi još 5–10 godina dok postrojenja ne budu amortizovana, ali premium tržišni segment prelazi na TOPCon i HJT.</div></div>
+      </div>
+    </div>
+    <!-- COMPARATIVE ANALYSIS -->
+    <div class="comp-section">
+      <h2>📊 Komparativna analiza svih tipova FN panela</h2>
+      <p class="comp-intro">Pregled i usporedba svih pet tehnologija po ključnim kriterijima odlučivanja: efikasnost, primjena i ekološki aspekti.</p>
+
+      <!-- 1. EFIKASNOST -->
+      <div class="comp-block">
+        <h3>1. Efikasnost – rangiranje tehnologija</h3>
+        <div class="eff-bars">
+          <div class="eff-row">
+            <div class="eff-label">🔋 PERC</div>
+            <div class="eff-bar-wrap"><div class="eff-bar" style="width:88%;background:linear-gradient(90deg,#0B3D5C,#4A9ECF)"></div></div>
+            <div class="eff-val">20–22%</div>
+          </div>
+          <div class="eff-row">
+            <div class="eff-label">🪟 Bifacijalni</div>
+            <div class="eff-bar-wrap"><div class="eff-bar" style="width:84%;background:linear-gradient(90deg,#1a5276,#5dade2)"></div></div>
+            <div class="eff-val">20–22%*</div>
+          </div>
+          <div class="eff-row">
+            <div class="eff-label">🔷 Monokristalni</div>
+            <div class="eff-bar-wrap"><div class="eff-bar" style="width:80%;background:linear-gradient(90deg,#2e86c1,#7fb3d3)"></div></div>
+            <div class="eff-val">19–24%</div>
+          </div>
+          <div class="eff-row">
+            <div class="eff-label">🌫️ Tanki film</div>
+            <div class="eff-bar-wrap"><div class="eff-bar" style="width:72%;background:linear-gradient(90deg,#2ECC71,#82e0aa)"></div></div>
+            <div class="eff-val">18–20%</div>
+          </div>
+          <div class="eff-row">
+            <div class="eff-label">🔶 Polikristalni</div>
+            <div class="eff-bar-wrap"><div class="eff-bar" style="width:60%;background:linear-gradient(90deg,#d68910,#f4d03f)"></div></div>
+            <div class="eff-val">17–19%</div>
+          </div>
+        </div>
+        <p style="font-size:.78rem;color:var(--muted);margin-top:10px">* Bifacijalni PERC u optimalnim terenskim uvjetima (reflektivna podloga) može doseći +25% energetskog prinosa u odnosu na standardni panel iste nazivne snage.</p>
+      </div>
+
+      <!-- 2. NAJBOLJA PRIMJENA -->
+      <div class="comp-block">
+        <h3>2. Najbolja primjena – matrica preporuka</h3>
+        <div style="overflow-x:auto">
+          <table class="app-matrix">
+            <thead>
+              <tr>
+                <th>Aplikacija</th>
+                <th>🔷 Mono</th>
+                <th>🔶 Poly</th>
+                <th>🌫️ Tanki film</th>
+                <th>🪟 Bifacial</th>
+                <th>🔋 PERC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>🏠 Krov kuće</td><td class="star-2">★★</td><td class="star-1">★</td><td class="star-0">–</td><td class="star-0">–</td><td class="star-2">★★</td></tr>
+              <tr><td>🏢 Poslovni krov</td><td class="star-2">★★</td><td class="star-1">★</td><td class="star-1">★</td><td class="star-1">★</td><td class="star-2">★★</td></tr>
+              <tr><td>⚡ Utility solarna farma</td><td class="star-1">★</td><td class="star-2">★★</td><td class="star-2">★★</td><td class="star-2">★★</td><td class="star-2">★★</td></tr>
+              <tr><td>🏗️ BIPV fasada / prozor</td><td class="star-0">–</td><td class="star-0">–</td><td class="star-2">★★</td><td class="star-1">★</td><td class="star-0">–</td></tr>
+              <tr><td>🌾 Agrivoltaika</td><td class="star-1">★</td><td class="star-1">★</td><td class="star-0">–</td><td class="star-2">★★</td><td class="star-1">★</td></tr>
+              <tr><td>🔋 Off-grid / baterija</td><td class="star-2">★★</td><td class="star-1">★</td><td class="star-1">★</td><td class="star-0">–</td><td class="star-2">★★</td></tr>
+              <tr><td>🌧️ Oblačna klima</td><td class="star-1">★</td><td class="star-0">–</td><td class="star-2">★★</td><td class="star-1">★</td><td class="star-2">★★</td></tr>
+              <tr><td>☀️ Vrući klimati</td><td class="star-1">★</td><td class="star-0">–</td><td class="star-2">★★</td><td class="star-1">★</td><td class="star-1">★</td></tr>
+              <tr><td>❄️ Snježne regije</td><td class="star-1">★</td><td class="star-1">★</td><td class="star-0">–</td><td class="star-2">★★</td><td class="star-1">★</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:.78rem;color:var(--muted);margin-top:8px"><span class="star-2">★★</span> Preporučeno &nbsp;|&nbsp; <span class="star-1">★</span> Prihvatljivo &nbsp;|&nbsp; <span class="star-0">–</span> Nije idealno</p>
+      </div>
+
+      <!-- 3. RECIKLAŽA -->
+      <div class="comp-block">
+        <h3>3. Reciklaža i ekološki aspekti</h3>
+        <div class="recycle-grid">
+          <div class="rec-card">
+            <span class="rec-badge rec-green">Dobra reciklabilnost</span>
+            <h4>🔷 Mono i 🔶 Poly silicij</h4>
+            <p>Staklo (~75% mase) i aluminijevi okviri potpuno su reciklabilni. Silicij iz ćelija moguće je termički obraditi i ponovo koristiti. EVA enkapsulant i backsheet su izazov – zahtijevaju posebne termičke ili hemijske procese. Evropski program PV Cycle pokriva obavezan povrat i recikliranje u EU. Energetski payback time: 1.5–2.5 god.</p>
+          </div>
+          <div class="rec-card">
+            <span class="rec-badge rec-green">Zatvorena petlja</span>
+            <h4>🌫️ CdTe tanki film (First Solar)</h4>
+            <p>First Solar jedini od velikih proizvođača nudi globalni take-back program s garancijom reciklaže. 90%+ materijala (staklo, telur, kadmij) vraća se u novu proizvodnju. CdTe je kemijski stabilan – ne ispušta kadmij ni pri požaru. Energetski payback time: samo 0.5–1 godina. Carbon footprint: 20–30 gCO₂eq/kWh (vs. 50+ za Si).</p>
+          </div>
+          <div class="rec-card">
+            <span class="rec-badge rec-yellow">Izazov: glass-glass</span>
+            <h4>🪟 Bifacijalni (glass-glass)</h4>
+            <p>Glass-glass konstrukcija otežava odvajanje EVA enkapsulanta između dva sloja stakla. Standardni termički procesi mogu se koristiti, ali uz veće energetske troškove. Prednost: nema plastičnog backsheet-a koji je posebno problematičan za recikliranje. Staklo (95% mase) lako se reciklira. Duži vijek (30+ god) znači manji ukupni otpad po kWh proizvedene energije.</p>
+          </div>
+          <div class="rec-card">
+            <span class="rec-badge rec-green">Standardni proces</span>
+            <h4>🔋 PERC</h4>
+            <p>Reciklažni proces identičan kao za standardni mono Si. Pasivizacijski sloj (SiO₂/Al₂O₃) ne povećava složenost reciklaže. Half-cell dizajn ne mijenja materijalni sastav – isti postotak reciklabilnosti. Gallij-dopiranje (anti-LID) nije ekološki problem. Svi PERC paneli koji se prodaju u EU moraju biti registrovani u PV Cycle sistemu.</p>
+          </div>
+          <div class="rec-card">
+            <span class="rec-badge rec-yellow">Ograničena infrastruktura</span>
+            <h4>🌍 CIGS tanki film</h4>
+            <p>Indij i galij su rijetki elementi – reciklaža je ekonomski isplativa, ali infrastruktura je ograničena. Nema masovnog globalnog take-back programa kao First Solar. Flexibilni CIGS paneli na polimernoj podlozi teže se recikliraju od staklenih. Na pozitivnoj strani: tanki slojevi (2–4 µm) znače dramatično manje materijala po modulu od kristalnog Si (180 µm).</p>
+          </div>
+          <div class="rec-card" style="background:linear-gradient(135deg,#f0fdf4,#f0f6fb);border-color:var(--secondary)">
+            <span class="rec-badge rec-green">Sažetak</span>
+            <h4>🌱 Ekološka bilanca po tehnologiji</h4>
+            <p><strong>Najmanji CO₂ otisak:</strong> CdTe (20–30 gCO₂eq/kWh)<br><strong>Najbrži payback:</strong> CdTe (0.5–1 god)<br><strong>Najduži vijek:</strong> Bifacijalni glass-glass (30+ god)<br><strong>Najraširenija reciklaža:</strong> Kristalni Si (PV Cycle EU)<br><strong>Zatvorena petlja:</strong> First Solar CdTe program<br><strong>Zaključak:</strong> Svi FN paneli imaju znatno manji životni CO₂ otisak od fosilnih goriva – čak i uz reciklažne izazove.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -522,6 +1025,23 @@ function reason(pk,a){
     poly:`Polikristalni panel je pametno rješenje! Na ${L} sa ${A} u ${S}, polikristalni paneli nude dokazanu pouzdanost uz povoljniju cijenu. S prioritetom "${P}", ovi paneli su industrijski standard za projekte gdje se traži dobar omjer troška i prinosa. Efikasnost 18–19% je odlična za tvoje uvjete, a niža cijena po Wattu omogućava instalaciju veće ukupne snage unutar budžeta.`
   };
   return r[pk]||"Na osnovu tvojih odgovora, preporučujemo ovaj panel kao optimalni izbor.";
+}
+
+// === EDUCATIONAL TABS ===
+function showTab(id){
+  document.querySelectorAll('.epanel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.etab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('epanel-'+id).classList.add('active');
+  document.querySelectorAll('.etab').forEach(t=>{
+    if(t.getAttribute('onclick').includes("'"+id+"'"))t.classList.add('active');
+  });
+}
+
+function toggleFaq(btn){
+  const item=btn.closest('.faq-item');
+  const isOpen=item.classList.contains('open');
+  btn.closest('.faq').querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
 }
 
 let cq=0,answers=[];
